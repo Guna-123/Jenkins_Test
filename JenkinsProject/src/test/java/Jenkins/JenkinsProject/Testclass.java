@@ -4,13 +4,23 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class Testclass {
-	
+	WebDriver driver;
+	@Parameters("Browser")
 	@Test
-	public void name() throws InterruptedException {
-		WebDriver driver= new ChromeDriver();
+	
+	public void name(String Browser) throws InterruptedException {
+		
+		if(Browser.equalsIgnoreCase("Chrome")) {
+		 driver= new ChromeDriver();
+		}
+		else if(Browser.equalsIgnoreCase("Edge")) {
+			 driver= new EdgeDriver();
+			}
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
