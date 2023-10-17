@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Design') {
+            steps {
+                echo 'Product at designing stage'
+            }
+        }
+        stage('Production') {
+            steps {
+                echo 'Product at Manufacturing stage'
+            }
+        }
+        stage('Supply') {
+            steps {
+                echo 'Product at Supply stage'
+            }
+        }
+        stage('Building a Project') {
+            steps {
+                 build 'Build'
+            }
+        }
+       
+    }
+    post{
+        always{
+            emailext body: 'Check the status of the build $Status', subject: 'First Pipe Line Project Status', to: 'jenkins00test@gmail.com'
+        }
+    }
+}
